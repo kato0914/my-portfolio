@@ -2,7 +2,16 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 0 2rem;
+  background-color: rgba(255, 255, 255, 0.3); /* 背景色を半透明の白に設定 */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: fixed; /* 固定位置に設定 */
+  top: 0; /* 画面の一番上に配置 */
+  left: 0; /* 左端に配置 */
+  right: 0; /* 右端まで広げる */
+  z-index: 1000; /* 他の要素の上に表示されるようにする */
+  backdrop-filter: blur(5px); /* 背景をぼかす効果を追加（オプション） */
+  height: 80px; /* ヘッダーの高さを明示的に設定 */
 }
 
 .logo-container {
@@ -11,30 +20,41 @@ header {
 }
 
 .logo-icon {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
+  width: 60px; /* アイコンのサイズを大きく */
+  height: 60px;
+  margin-right: 15px; /* アイコンと文字の間隔を調整 */
 }
 
 .logo-text {
+  font-size: 1.8rem; /* ロゴテキストのサイズを大きく */
   font-weight: bold;
+  color: #333;
 }
 
 nav ul {
   display: flex;
   list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 nav ul li {
-  margin-left: 20px;
+  margin-left: 30px; /* メニュー項目間の間隔を増やす */
 }
 
 nav ul li a {
   text-decoration: none;
   color: #333;
   font-weight: bold;
+  font-size: 1.1rem; /* メニューテキストのサイズを少し大きく */
+  transition: color 0.3s ease;
 }
 
 nav ul li a:hover {
   color: #007bff;
+}
+
+/* メインコンテンツがヘッダーの下に隠れないようにするためのスペーサー */
+.header-spacer {
+  height: 80px; /* ヘッダーの高さに合わせて調整 */
 }

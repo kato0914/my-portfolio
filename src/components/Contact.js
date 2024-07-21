@@ -26,42 +26,24 @@ function Contact() {
 
   return (
     <section id="contact">
-      <h2>お問い合わせ</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
+      <div className="section-content">
+        <div className="contact-info">
+          <p>お問い合わせやお仕事のご相談は、</p>
+          <p>下記のコンタクトフォームからお気軽にご連絡ください。</p>
+        </div>
+        <form>
           <label htmlFor="name">お名前：</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
+          <input type="text" id="name" name="name" required />
+
           <label htmlFor="email">メールアドレス：</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
+          <input type="email" id="email" name="email" required />
+
           <label htmlFor="message">メッセージ：</label>
-          <textarea
-            id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            required
-          ></textarea>
-        </div>
-        <button type="submit">送信</button>
-      </form>
+          <textarea id="message" name="message" required></textarea>
+
+          <button type="submit">送信</button>
+        </form>
+      </div>
     </section>
   );
 }

@@ -1,0 +1,80 @@
+#about {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  text-align: center; /* 全体を中央寄せ */
+  box-sizing: border-box; /* パディングを幅に含める */
+}
+
+#about h2 {
+  font-size: 1.8em; /* サイズを小さく */
+  color: #333;
+  margin-bottom: 10px;
+}
+
+#about h3 {
+  font-size: 1.4em; /* サイズを小さく */
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.introduction {
+  text-align: left; /* 自己紹介文は左寄せのまま */
+  max-width: 600px; /* 幅を制限 */
+  margin: 0 auto; /* 中央に配置 */
+  padding: 0 20px; /* 左右にパディングを追加 */
+}
+
+.introduction p {
+  font-size: 1em;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 15px;
+}
+
+.skills {
+  margin-top: 30px;
+  padding: 0 20px; /* 左右にパディングを追加 */
+}
+
+.skills h4 {
+  font-size: 1.2em; /* サイズを調整 */
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.skills ul {
+  list-style-type: none;
+  padding: 0;
+  display: inline-block; /* リストを中央に配置 */
+  text-align: left; /* リスト項目は左寄せ */
+  margin: 0 auto; /* 中央揃え */
+}
+
+.skills li {
+  font-size: 1em;
+  color: #555;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.skills li::before {
+  content: "•";
+  color: #007bff;
+  font-size: 1.2em;
+  position: absolute;
+  left: 0;
+  top: -2px;
+}
+
+.contact-info {
+  font-size: 1em;
+  color: #666;
+  font-style: italic;
+  max-width: 600px; /* 幅を制限 */
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px; /* 左右にパディングを追加 */
+}

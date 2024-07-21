@@ -1,0 +1,12 @@
+.zoomable-image-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.zoomable-image {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
