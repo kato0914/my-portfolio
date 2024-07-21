@@ -25,26 +25,48 @@ function Contact() {
   };
 
   return (
-    <section id="contact">
-      <div className="section-content">
+    <div id="contact">
+      <div className="contact-content">
         <div className="contact-info">
           <p>お問い合わせやお仕事のご相談は、</p>
           <p>下記のコンタクトフォームからお気軽にご連絡ください。</p>
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <label htmlFor="name">お名前：</label>
-          <input type="text" id="name" name="name" required />
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
 
           <label htmlFor="email">メールアドレス：</label>
-          <input type="email" id="email" name="email" required />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
 
           <label htmlFor="message">メッセージ：</label>
-          <textarea id="message" name="message" required></textarea>
+          <textarea
+            id="message"
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            required
+          ></textarea>
 
-          <button type="submit">送信</button>
+          <div style={{ textAlign: 'center' }}>
+            <button type="submit">送信</button>
+          </div>
         </form>
       </div>
-    </section>
+    </div>
   );
 }
 

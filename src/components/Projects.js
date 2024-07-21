@@ -92,7 +92,6 @@ function Projects() {
   return (
     <section id="projects">
       <div className="section-content">
-        <h2>Projects</h2>
         <div className="project-grid">
           {projects.map((project) => (
             <div

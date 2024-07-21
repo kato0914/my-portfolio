@@ -1,57 +1,13 @@
 #contact {
-  max-width: 100%;
+  width: 100%;
+  max-width: 500px; /* フォームの最大幅を設定 */
   margin: 0 auto;
   padding: 20px;
   box-sizing: border-box;
 }
 
-.section-content {
-  max-width: 800px; /* フォームの最大幅を設定 */
-  margin: 0 auto; /* 中央寄せ */
-  padding: 0 20px; /* 左右のパディングを追加 */
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  width: 100%; /* フォームの幅を100%に設定 */
-}
-
-label {
-  margin-top: 15px;
-  font-weight: bold;
-}
-
-input[type="text"],
-input[type="email"],
-textarea {
-  width: 100%; /* 入力フィールドの幅を100%に設定 */
-  padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-textarea {
-  height: 150px; /* テキストエリアの高さを設定 */
-  resize: vertical; /* 垂直方向のリサイズのみ許可 */
-}
-
-button[type="submit"] {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-  align-self: flex-start; /* ボタンを左寄せに */
-}
-
-button[type="submit"]:hover {
-  background-color: #0056b3;
+.contact-content {
+  width: 100%;
 }
 
 .contact-info {
@@ -65,18 +21,49 @@ button[type="submit"]:hover {
   padding: 0;
 }
 
-.contact-info p:first-child {
-  margin-bottom: 5px;
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-@media (max-width: 768px) {
-  .contact-info {
-    font-size: 0.9em;
-  }
+label {
+  margin-top: 15px;
+  font-weight: bold;
+  text-align: left;
 }
 
-@media (max-width: 480px) {
-  .contact-info {
-    font-size: 0.8em;
-  }
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+textarea {
+  height: 150px;
+  resize: vertical;
+}
+
+button[type="submit"] {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  align-self: center; /* 中央寄せに変更 */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
 }

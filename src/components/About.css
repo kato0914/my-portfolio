@@ -1,16 +1,16 @@
 #about {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  text-align: center; /* 全体を中央寄せ */
-  box-sizing: border-box; /* パディングを幅に含める */
+  width: 100%;
+  background-color: #fafafa; /* ペールブルーの背景色 */
+  padding: 40px 0; /* 上下のパディングを追加 */
 }
 
-#about h2 {
-  font-size: 1.8em; /* サイズを小さく */
-  color: #333;
-  margin-bottom: 10px;
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  text-align: center;
+  box-sizing: border-box;
 }
 
 #about h3 {
@@ -23,7 +23,7 @@
   text-align: left; /* 自己紹介文は左寄せのまま */
   max-width: 600px; /* 幅を制限 */
   margin: 0 auto; /* 中央に配置 */
-  padding: 0 20px; /* 左右にパディングを追加 */
+  padding: 0; /* 左右にパディングを追加しない */
 }
 
 .introduction p {
@@ -34,8 +34,8 @@
 }
 
 .skills {
-  margin-top: 30px;
-  padding: 0 20px; /* 左右にパディングを追加 */
+  margin-top: 30px; /* 上下のパディングを追加 */
+  padding: 0; /* 左右にパディングを追加しない */
 }
 
 .skills h4 {

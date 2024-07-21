@@ -12,8 +12,8 @@
 }
 
 .project-card {
-  background-color: #fff;
-  border: 1px solid #ddd;
+  background-color: white;
+  border: 1px solid #b8daff; /* ボーダー色を変更 */
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -52,11 +52,12 @@
 .project-card h3 {
   margin: 15px 15px 10px;
   font-size: 1.2em;
+  color: #333333; /* テキスト色を変更 */
 }
 
 .project-card p {
   margin: 0 15px 15px;
-  color: #666;
+  color: #666666; /* テキスト色を変更 */
   font-size: 0.9em;
   flex-grow: 1;
 }

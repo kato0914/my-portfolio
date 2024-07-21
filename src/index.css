@@ -1,21 +1,38 @@
-body {
+/* リセットスタイルや、グローバルに適用したい基本的なスタイルのみを残す */
+
+/* ブラウザ間の差異を減らすための基本的なリセット */
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0;
+}
+
+/* フォントのスムージングを有効にする */
+body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* コードブロックのフォントを設定 */
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
+/* スクロール時のヘッダー固定のための調整 */
 html {
   scroll-padding-top: 100px; /* ヘッダーの高さ + 余分なスペース */
 }
 
-.section-content {
-  padding-top: 20px; /* タイトルの上に余白を追加 */
+/* その他のグローバルスタイル */
+/* 例: リンクの下線を削除 */
+a {
+  text-decoration: none;
 }
+
+/* 例: リストスタイルを削除 */
+ul, ol {
+  list-style: none;
+}
+
+/* 必要に応じて、他のグローバルスタイルを追加 */
