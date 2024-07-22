@@ -22,10 +22,10 @@
 
 .hero-content {
   text-align: center;
-  color: #333; /* テキストの色を暗くして、明るい背景に対してコントラストを付ける */
+  color: #E6F3FF; /* テキストの色を暗くして、明るい背景に対してコントラストを付ける */
   position: relative;
   z-index: 1;
-  text-shadow: 1px 1px 5px rgb(255, 255, 255); /* テキストの読みやすさを向上させる */
+  text-shadow: 1px 1px 5px rgb(0, 0, 0); /* テキストの読みやすさを向上させる */
 }
 
 .hero-content h1 {

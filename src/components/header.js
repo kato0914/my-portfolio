@@ -43,10 +43,12 @@ function Header() {
   return (
     <>
       <header className={isScrolled ? 'scrolled' : ''}>
-        <div className="logo-container">
-          <img src={logo} alt="Logo" className="logo-icon" />
-          <span className="logo-text">Papa Pixel Lab</span>
-        </div>
+        <a id="logo" href="#hero" onClick={(e) => handleNavClick(e, 'hero')}>
+          <div className="logo-container">
+            <img src={logo} alt="Logo" className="logo-icon" />
+            <span className="logo-text">Papa Pixel Lab</span>
+          </div>
+        </a>
         <nav className={isMenuOpen ? 'active' : ''}>
           <ul>
             <li><a href="#hero" onClick={(e) => handleNavClick(e, 'hero')}>Top</a></li>

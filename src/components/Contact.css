@@ -49,6 +49,7 @@ textarea {
 }
 
 button[type="submit"] {
+  width: 100%; /* ボタンを親要素の幅いっぱいに広げる */
   margin-top: 20px;
   padding: 10px 20px;
   background-color: #007bff;
@@ -57,10 +58,6 @@ button[type="submit"] {
   border-radius: 4px;
   font-size: 16px;
   cursor: pointer;
-  align-self: center; /* 中央寄せに変更 */
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 button[type="submit"]:hover {
@@ -102,4 +99,49 @@ button[type="submit"]:hover {
   .radio-option label {
     font-size: 14px;
   }
+}
+
+.terms-agreement {
+  margin-bottom: 20px;
+}
+
+h4 {
+  margin: 20px 0 5px 0;
+}
+
+.terms-agreement p {
+  line-height: 1.5;
+}
+
+#checkbox {
+  margin: 0;
+}
+
+.checkbox-wrapper {
+  display: flex;
+}
+
+.checkbox-wrapper label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.checkbox-wrapper span {
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.alert {
+  background-color: #ffebee;
+  color: #d32f2f;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 14px;
 }
