@@ -2,7 +2,6 @@
   width: 100%;
   max-width: 500px; /* フォームの最大幅を設定 */
   margin: 0 auto;
-  padding: 20px;
   box-sizing: border-box;
 }
 
@@ -66,4 +65,41 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: #0056b3;
+}
+
+.radio-buttons {
+  margin: 20px 0;
+}
+
+.radio-buttons p {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.radio-option input[type="radio"] {
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+}
+
+.radio-option label {
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.required {
+  color: #ff0000;
+}
+
+/* レスポンシブデザイン用 */
+@media (max-width: 768px) {
+  .radio-option label {
+    font-size: 14px;
+  }
 }

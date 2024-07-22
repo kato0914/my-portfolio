@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './components/header';
+import Hero from './components/Hero';
 import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
@@ -9,9 +10,9 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <div className="header-spacer"></div>
       <main className="main-content">
-        <section id="projects" className="projects-section">
+        <Hero />
+        <section id="projects">
           <div className="section-content">
             <h2>Projects</h2>
             <Projects />

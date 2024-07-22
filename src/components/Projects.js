@@ -21,7 +21,7 @@ function Projects() {
     { 
       id: 1, 
       title: 'KodomoBijutukan', 
-      description: '自分の子供が作った作品の写真を登録できるLPを作成しました。\nチーム開発でFlaskを担当しました。\n使用言語：HTML,CSS,Flask,JavaScript',
+      description: 'お子様が作った作品の写真を登録できるWebアプリを作成しました。\nチーム開発でFlaskを担当しました。\n使用言語：HTML,CSS,Flask,JavaScript',
       image: project1Image,
       modalImage: project1ModalImage, // モーダル用の新しい画像
       link: '' // プロジェクトのリンクを追加
@@ -29,7 +29,7 @@ function Projects() {
     { 
       id: 7, 
       title: '筋トレ記録・分析アプリ', 
-      description: '筋トレを記録してデータを分析し、継続していくためのアプリを作成しました。\nHTML,CSS,React,Googleスプレッドシート',
+      description: '筋トレを記録してデータを分析し、継続していくためのアプリを作成しました。\nHTML,CSS,React,GAS,Googleスプレッドシート',
       image: project7Image,
       link: 'https://kintore-react-mirror.vercel.app/' // プロジェクトのリンクを追加
     },

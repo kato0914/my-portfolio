@@ -1,12 +1,11 @@
 #about {
   width: 100%;
   background-color: #fafafa; /* ペールブルーの背景色 */
-  padding: 40px 0; /* 上下のパディングを追加 */
 }
 
 .about-content {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 1rem auto;
   padding: 0 20px;
   font-family: 'Helvetica Neue', Arial, sans-serif;
   text-align: center;
@@ -44,29 +43,26 @@
   margin-bottom: 15px;
 }
 
-.skills ul {
-  list-style-type: none;
-  padding: 0;
-  display: inline-block; /* リストを中央に配置 */
-  text-align: left; /* リスト項目は左寄せ */
-  margin: 0 auto; /* 中央揃え */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.skills li {
-  font-size: 1em;
-  color: #555;
-  margin-bottom: 10px;
-  padding-left: 20px;
-  position: relative;
+.skill-item {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 0.9em;
+  color: #333;
 }
 
-.skills li::before {
-  content: "•";
-  color: #007bff;
-  font-size: 1.2em;
-  position: absolute;
-  left: 0;
-  top: -2px;
+@media (max-width: 600px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .contact-info {

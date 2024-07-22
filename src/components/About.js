@@ -12,7 +12,7 @@ function About() {
 
       常に新しい技術トレンドにアンテナを張り、ユーザビリティとパフォーマンスの最適化に力を入れています。
 
-      チーム開発では、コミュニケーションを大切にし、メンバーと協力してプロジェクトを成功に導くことを心がけています。
+      ExcelVBAやGoogleAppScriptを用いた業務効率化アプリの作成も行なっております。
 
       このポートフォリオサイトでは、私のスキルセットと制作例をご覧いただけます。
 
@@ -25,6 +25,8 @@ function About() {
       "JavaScript (ES6+)",
       "React.js",
       "Responsive Web Design",
+      "Microsoft Excel VBA",
+      "Google App Script",
       "Version Control (Git)",
       "UI/UX Design Principles"
     ],
@@ -40,11 +42,11 @@ function About() {
       </div>
       <div className="skills">
         <h4>スキルセット</h4>
-        <ul>
+        <div className="skills-grid">
           {profile.skills.map((skill, index) => (
-            <li key={index}>{skill}</li>
+            <div key={index} className="skill-item">{skill}</div>
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   );

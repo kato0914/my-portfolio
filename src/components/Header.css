@@ -3,7 +3,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 0 2rem;
-  background-color: rgba(255, 255, 255, 0.3); /* 背景色を半透明の白に設定 */
+  background-color: transparent; /* 背景色を透明に設定 */
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   position: fixed; /* 固定位置に設定 */
   top: 0; /* 画面の一番上に配置 */
@@ -12,6 +12,11 @@ header {
   z-index: 1000; /* 他の要素の上に表示されるようにする */
   backdrop-filter: blur(5px); /* 背景をぼかす効果を追加（オプション） */
   height: 80px; /* ヘッダーの高さを明示的に設定 */
+  transition: background-color 0.3s ease; /* 背景色のトランジションを追加 */
+}
+
+header.scrolled {
+  background-color: rgba(255, 255, 255, 0.9); /* スクロール時に背景色を変更 */
 }
 
 .logo-container {
@@ -54,7 +59,71 @@ nav ul li a:hover {
   color: #007bff;
 }
 
-/* メインコンテンツがヘッダーの下に隠れないようにするためのスペーサー */
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger-menu span {
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  margin: 2px 0;
+  transition: 0.4s;
+}
+
+@media (max-width: 768px) {
+  header {
+    height: 60px;
+    padding: 0 1rem;
+  }
+
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  .logo-text {
+    font-size: 1.2rem;
+  }
+
+  nav {
+    display: none;
+  }
+
+  nav.active {
+    display: block;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
+  }
+
+  nav.active ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav.active ul li {
+    margin: 10px 0;
+  }
+
+  .hamburger-menu {
+    display: flex;
+  }
+}
+
+/* メインコンテンツがヘッダーの下に隠れないよにするためのスペーサー */
 .header-spacer {
-  height: 80px; /* ヘッダーの高さに合わせて調整 */
+  height: 80px; /* デスクトップ用 */
+}
+
+@media (max-width: 768px) {
+  .header-spacer {
+    height: 60px; /* モバイル用に高さを調整 */
+  }
 }

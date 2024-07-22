@@ -1,0 +1,48 @@
+.hero {
+  height: 100vh;
+  width: 100%;
+  background-image: url('../img/hero-background.webp'); /* 背景画像のパスを確認してください */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.3); /* 白のオーバーレイを追加して明るくする */
+}
+
+.hero-content {
+  text-align: center;
+  color: #333; /* テキストの色を暗くして、明るい背景に対してコントラストを付ける */
+  position: relative;
+  z-index: 1;
+  text-shadow: 1px 1px 5px rgb(255, 255, 255); /* テキストの読みやすさを向上させる */
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+}

@@ -22,6 +22,7 @@ code {
 /* スクロール時のヘッダー固定のための調整 */
 html {
   scroll-padding-top: 100px; /* ヘッダーの高さ + 余分なスペース */
+  scroll-behavior: smooth; /* スクロールをスムーズにする */
 }
 
 /* その他のグローバルスタイル */
