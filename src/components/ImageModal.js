@@ -1,21 +1,24 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import './ImageModal.css';
 import ZoomableImage from './ZoomableImage';
 
 function ImageModal({ isOpen, onClose, imageSrc, isZoomable }) {
-  const contentRef = useRef(null);
-
   useEffect(() => {
-    if (isOpen && contentRef.current) {
-      contentRef.current.scrollTop = 0; // モーダルが開かれたときに最上部にスクロール
+    const originalStyle = window.getComputedStyle(document.body).overflow;
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
     }
+
+    return () => {
+      document.body.style.overflow = originalStyle;
+    };
   }, [isOpen]);
 
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content" ref={contentRef}>
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content">
         <div className="modal-image-container">
           {isZoomable ? (
             <ZoomableImage src={imageSrc} alt="拡大画像" />
@@ -23,9 +26,7 @@ function ImageModal({ isOpen, onClose, imageSrc, isZoomable }) {
             <img src={imageSrc} alt="拡大画像" className="modal-image" />
           )}
         </div>
-      </div>
-      <div className="modal-close-container">
-        <button className="modal-close" onClick={onClose}>閉じる</button>
+        <button className="close-button" onClick={onClose}>×</button>
       </div>
     </div>
   );
