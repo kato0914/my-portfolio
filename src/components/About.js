@@ -23,7 +23,7 @@ function About() {
     skills: [
       "HTML5 / CSS3",
       "JavaScript (ES6+)",
-      "React.js",
+      "React/Next.js",
       "Responsive Web Design",
       "Microsoft Excel VBA",
       "Google App Script",

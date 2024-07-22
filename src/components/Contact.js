@@ -11,6 +11,8 @@ function Contact() {
   });
   const [showAlert, setShowAlert] = useState(false);
   const alertRef = useRef(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
     if (showAlert && alertRef.current) {
@@ -35,7 +37,8 @@ function Contact() {
       setShowAlert(true);
       return;
     }
-    console.log('送信されるデータ:', formData);
+    setIsSubmitting(true);
+
     try {
       const response = await fetch('http://localhost:3001/send-email', {
         method: 'POST',
@@ -44,21 +47,28 @@ function Contact() {
         },
         body: JSON.stringify(formData),
       });
+
       if (response.ok) {
-        alert('メッセージが送信されました');
-        setFormData({
-          name: '',
-          email: '',
-          requestType: '',
-          message: '',
-          agreeToTerms: false
-        });
+        setIsSubmitted(true);
+        // 成功アニメーション後にフォームをリセット
+        setTimeout(() => {
+          setIsSubmitted(false);
+          setFormData({
+            name: '',
+            email: '',
+            requestType: '',
+            message: '',
+            agreeToTerms: false
+          });
+        }, 2000);
       } else {
-        alert('エラーが発生しました');
+        throw new Error('メール送信に失敗しました');
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('エラーが発生しました');
+      alert('メールの送信中にエラーが発生しました。もう一度お試しください。');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -163,7 +173,15 @@ function Contact() {
             )}
           </div>
 
-          <button type="submit">送信</button>
+          <button 
+            type="submit" 
+            className={`submit-button ${isSubmitting ? 'submitting' : ''} ${isSubmitted ? 'submitted' : ''}`}
+            onClick={handleSubmit}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? '送信中...' : isSubmitted ? '送信完了！' : '送信'}
+            {isSubmitted && <span className="success-icon">🎉</span>}
+          </button>
         </form>
       </div>
     </div>

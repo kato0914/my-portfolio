@@ -58,10 +58,60 @@ button[type="submit"] {
   border-radius: 4px;
   font-size: 16px;
   cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 button[type="submit"]:hover {
   background-color: #0056b3;
+}
+
+button[type="submit"].submitting {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button[type="submit"].submitted {
+  background-color: #28a745;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+  40% {transform: translateY(-30px);}
+  60% {transform: translateY(-15px);}
+}
+
+button[type="submit"].submitted span.success-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  animation: bounce 1s;
+}
+
+@keyframes confetti {
+  0% { transform: translateY(0) rotateZ(0deg); opacity: 1; }
+  100% { transform: translateY(-1000%) rotateZ(720deg); opacity: 0; }
+}
+
+button[type="submit"].submitted::before,
+button[type="submit"].submitted::after {
+  content: '🎊';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 20px;
+  animation: confetti 1s ease-out forwards;
+}
+
+button[type="submit"].submitted::before {
+  transform: translate(-100%, -50%);
+}
+
+button[type="submit"].submitted::after {
+  transform: translate(0%, -50%);
 }
 
 .radio-buttons {
