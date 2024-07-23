@@ -1,5 +1,6 @@
 import React, { lazy, Suspense, useEffect } from 'react';
 import Header from './components/header';
+import Footer from './components/Footer';
 import { loadScript } from './utils/loadScript';
 
 const Hero = lazy(() => import('./components/Hero'));
@@ -65,6 +66,7 @@ function App() {
           </section>
         </main>
       </Suspense>
+      <Footer />
     </div>
   );
 }

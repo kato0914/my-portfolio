@@ -11,6 +11,8 @@ body {
 .App {
   width: 100%;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .main-content {
@@ -113,4 +115,22 @@ input, textarea {
 
 textarea {
   height: 150px;
+}
+
+footer {
+  background-color: #f8f9fa;
+  padding: 20px 0;
+  text-align: center;
+  margin-top: auto;
+}
+
+.footer-logo {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+.footer-text {
+  font-size: 14px;
+  color: #333;
 }
