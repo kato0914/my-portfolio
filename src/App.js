@@ -1,10 +1,11 @@
-import React, { useEffect, lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import Header from './components/header';
+import { loadScript } from './utils/loadScript';
+
 const Hero = lazy(() => import('./components/Hero'));
 const About = lazy(() => import('./components/About'));
 const Projects = lazy(() => import('./components/Projects'));
 const Contact = lazy(() => import('./components/Contact'));
-import './App.css';
 
 function App() {
   useEffect(() => {
@@ -16,8 +17,26 @@ function App() {
       document.head.appendChild(link);
     };
 
+    // ヒーロー画像をプリロード
     preloadImage('/img/hero-background-desktop.webp');
     preloadImage('/img/hero-background-mobile.webp');
+
+    const loadThirdPartyScripts = async () => {
+      try {
+        await loadScript('https://www.googletagmanager.com/gtag/js?id=G-1WE6MNJQ8N');
+        await loadScript('https://www.clarity.ms/tag/nbn3ob3k6i');
+        // 他のサードパーティスクリプトもここに追加
+      } catch (error) {
+        console.error('サードパーティスクリプトの読み込みに失敗しました:', error);
+      }
+    };
+
+    // ページの主要なコンテンツが読み込まれた後にスクリプトを読み込む
+    window.addEventListener('load', loadThirdPartyScripts);
+
+    return () => {
+      window.removeEventListener('load', loadThirdPartyScripts);
+    };
   }, []);
 
   return (
