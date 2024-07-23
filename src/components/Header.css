@@ -224,3 +224,51 @@ nav ul li a:hover::before {
     height: 60px; /* モバイル用に高さを調整 */
   }
 }
+
+.nav-links li a::before,
+.mobile-menu li a::before {
+  content: '✨';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  animation: sparkle 0.5s ease-out;
+  opacity: 0;
+  transform: translateY(100%) rotate(45deg);
+}
+
+.nav-links li a:hover::before,
+.nav-links li a:focus::before,
+.nav-links li a:active::before,
+.mobile-menu li a:hover::before,
+.mobile-menu li a:focus::before,
+.mobile-menu li a:active::before {
+  opacity: 1;
+  transform: translateY(0) rotate(45deg);
+}
+
+/* モバイルメニューのスタイル */
+.mobile-menu li {
+  margin: 15px 0;
+}
+
+.mobile-menu li a {
+  position: relative;
+  overflow: hidden;
+}
+
+/* キラキラエフェクトのアニメーション */
+@keyframes sparkle {
+  0% {
+    opacity: 0;
+    transform: translateY(100%) rotate(45deg);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100%) rotate(45deg);
+  }
+}

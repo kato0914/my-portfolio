@@ -1,7 +1,7 @@
 .hero {
   height: 100vh;
   width: 100%;
-  background-image: url('../img/hero-background.webp'); /* 背景画像のパスを確認してください */
+  background-image: url('../img/hero-background-desktop.webp'); /* デスクトップ用の大きい画像 */
   background-size: cover;
   background-position: center;
   display: flex;
@@ -38,6 +38,10 @@
 }
 
 @media (max-width: 768px) {
+  .hero {
+    background-image: url('../img/hero-background-mobile.webp'); /* モバイル用の小さい画像 */
+  }
+
   .hero-content h1 {
     font-size: 2rem;
   }
