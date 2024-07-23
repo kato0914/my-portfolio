@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import Header from './components/header';
-import Hero from './components/Hero';
-import About from './components/About';
-import Projects from './components/Projects';
-import Contact from './components/Contact';
+const Hero = lazy(() => import('./components/Hero'));
+const About = lazy(() => import('./components/About'));
+const Projects = lazy(() => import('./components/Projects'));
+const Contact = lazy(() => import('./components/Contact'));
 import './App.css';
 
 function App() {
@@ -16,7 +16,6 @@ function App() {
       document.head.appendChild(link);
     };
 
-    // ヒーロー画像をプリロード
     preloadImage('/img/hero-background-desktop.webp');
     preloadImage('/img/hero-background-mobile.webp');
   }, []);
@@ -24,27 +23,29 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <main className="main-content">
-        <Hero />
-        <section id="projects">
-          <div className="section-content">
-            <h2>Projects</h2>
-            <Projects />
-          </div>
-        </section>
-        <section id="about" className="about-section">
-          <div className="section-content">
-            <h2>About</h2>
-            <About />
-          </div>
-        </section>
-        <section id="contact" className="contact-section">
-          <div className="section-content">
-            <h2>Contact</h2>
-            <Contact />
-          </div>
-        </section>
-      </main>
+      <Suspense fallback={<div>Loading...</div>}>
+        <main className="main-content">
+          <Hero />
+          <section id="projects">
+            <div className="section-content">
+              <h2>Projects</h2>
+              <Projects />
+            </div>
+          </section>
+          <section id="about" className="about-section">
+            <div className="section-content">
+              <h2>About</h2>
+              <About />
+            </div>
+          </section>
+          <section id="contact" className="contact-section">
+            <div className="section-content">
+              <h2>Contact</h2>
+              <Contact />
+            </div>
+          </section>
+        </main>
+      </Suspense>
     </div>
   );
 }
