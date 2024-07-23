@@ -173,6 +173,8 @@ nav ul li a:hover::before {
     width: 60px;
     height: 60px;
     margin-right: 10px;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
   }
 
   .logo-text {
