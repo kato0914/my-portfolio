@@ -195,3 +195,121 @@ h4 {
   text-align: center;
   font-size: 14px;
 }
+
+.fancy-button {
+  margin: auto;
+  position: relative;
+  width: 100%; /* 親要素の幅いっぱいに広げる */
+}
+
+.button {
+  background: #dc143c;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-family: Roboto, sans-serif;
+  font-size: 1.9em;
+  letter-spacing: 0.2px;
+  text-align: center;
+  text-transform: uppercase;
+  user-select: none;
+  width: 100%; /* ボタンを親要素の幅いっぱいに広げる */
+  border: none;
+}
+
+.button:hover {
+  background: #e32f4c;
+}
+
+.button:active {
+  box-shadow: inset 0px 2px 8px -1px #b5102f;
+}
+
+.frills, .frills:after, .frills:before {
+  position: absolute;
+  background: #dc143c;
+  border-radius: 4px;
+  height: 8px;
+}
+
+.frills:after, .frills:before {
+  content: "";
+  display: block;
+}
+
+.frills:before {
+  bottom: 45px;
+}
+
+.frills:after {
+  top: 45px;
+}
+
+.left-frills {
+  left: -14px; /* 位置を調整 */
+  top: 28.5px;
+}
+
+.right-frills {
+  right: -14px; /* 位置を調整 */
+  top: 28.5px;
+}
+
+.left-frills:before, .right-frills:after {
+  transform: rotate(34deg);
+}
+
+.left-frills:after, .right-frills:before {
+  transform: rotate(-34deg);
+}
+
+.active .left-frills {
+  animation: move-left 0.38s ease-out, width-to-zero 0.38s ease-out;
+}
+
+.active .left-frills:before {
+  animation: width-to-zero 0.38s ease-out, move-up 0.38s ease-out;
+}
+
+.active .left-frills:after {
+  animation: width-to-zero 0.38s ease-out, move-down 0.38s ease-out;
+}
+
+.active .right-frills {
+  animation: move-right 0.38s ease-out, width-to-zero 0.38s ease-out;
+}
+
+.active .right-frills:before {
+  animation: width-to-zero 0.38s ease-out, move-up 0.38s ease-out;
+}
+
+.active .right-frills:after {
+  animation: width-to-zero 0.38s ease-out, move-down 0.38s ease-out;
+}
+
+@keyframes move-left {
+  0% { transform: none; }
+  65% { transform: translateX(-80px); }
+  100% { transform: translateX(-80px); }
+}
+
+@keyframes move-right {
+  0% { transform: none; }
+  65% { transform: translateX(80px); }
+  100% { transform: translateX(80px); }
+}
+
+@keyframes width-to-zero {
+  0% { width: 38px; }
+  100% { width: 8px; }
+}
+
+@keyframes move-up {
+  0% {}
+  100% { bottom: 69.75px; }
+}
+
+@keyframes move-down {
+  0% {}
+  100% { top: 69.75px; }
+}

@@ -13,6 +13,7 @@ function Contact() {
   const alertRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     if (showAlert && alertRef.current) {
@@ -33,11 +34,16 @@ function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.name || !formData.email || !formData.requestType || !formData.message) {
+      alert('すべての必須フィールドを入力してください。');
+      return;
+    }
     if (!formData.agreeToTerms) {
       setShowAlert(true);
       return;
     }
     setIsSubmitting(true);
+    setIsActive(true);
 
     try {
       const response = await fetch('http://localhost:3001/send-email', {
@@ -50,7 +56,6 @@ function Contact() {
 
       if (response.ok) {
         setIsSubmitted(true);
-        // 成功アニメーション後にフォームをリセット
         setTimeout(() => {
           setIsSubmitted(false);
           setFormData({
@@ -60,6 +65,7 @@ function Contact() {
             message: '',
             agreeToTerms: false
           });
+          setIsActive(false);
         }, 2000);
       } else {
         throw new Error('メール送信に失敗しました');
@@ -67,18 +73,24 @@ function Contact() {
     } catch (error) {
       console.error('Error:', error);
       alert('メールの送信中にエラーが発生しました。もう一度お試しください。');
+      setIsActive(false);
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  useEffect(() => {
+    if (isActive) {
+      const timer = setTimeout(() => {
+        setIsActive(false);
+      }, 380);
+      return () => clearTimeout(timer);
+    }
+  }, [isActive]);
+
   return (
     <div id="contact">
       <div className="contact-content">
-        <div className="contact-info">
-          <p>お問い合わせやお仕事のご相談は、</p>
-          <p>下記のコンタクトフォームからお気軽にご連絡ください。</p>
-        </div>
         <form onSubmit={handleSubmit}>
           <label htmlFor="name">お名前<a class="required">*</a></label>
           <input
@@ -173,15 +185,17 @@ function Contact() {
             )}
           </div>
 
-          <button 
-            type="submit" 
-            className={`submit-button ${isSubmitting ? 'submitting' : ''} ${isSubmitted ? 'submitted' : ''}`}
-            onClick={handleSubmit}
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? '送信中...' : isSubmitted ? '送信完了！' : '送信'}
-            {isSubmitted && <span className="success-icon">🎉</span>}
-          </button>
+          <div className={`fancy-button ${isActive ? 'active' : ''}`}>
+            <div className="frills left-frills"></div>
+            <button 
+              className="button"
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? '送信中...' : isSubmitted ? '送信完了！' : '送信'}
+            </button>
+            <div className="frills right-frills"></div>
+          </div>
         </form>
       </div>
     </div>
