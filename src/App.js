@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from './components/header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -7,6 +7,20 @@ import Contact from './components/Contact';
 import './App.css';
 
 function App() {
+  useEffect(() => {
+    const preloadImage = (src) => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = src;
+      document.head.appendChild(link);
+    };
+
+    // ヒーロー画像をプリロード
+    preloadImage('/img/hero-background-desktop.webp');
+    preloadImage('/img/hero-background-mobile.webp');
+  }, []);
+
   return (
     <div className="App">
       <Header />

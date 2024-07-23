@@ -1,7 +1,7 @@
 .hero {
   height: 100vh;
   width: 100%;
-  background-image: url('../img/hero-background-desktop.webp'); /* デスクトップ用の大きい画像 */
+  background-image: url('../img/hero-background-desktop.webp');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -17,29 +17,30 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.3); /* 白のオーバーレイを追加して明るくする */
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .hero-content {
   text-align: center;
-  color: #E6F3FF; /* テキストの色を暗くして、明るい背景に対してコントラストを付ける */
+  color: #333;
   position: relative;
   z-index: 1;
-  text-shadow: 1px 1px 5px rgb(0, 0, 0); /* テキストの読みやすさを向上させる */
 }
 
 .hero-content h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
 }
 
 .hero-content p {
   font-size: 1.5rem;
+  font-weight: normal;
 }
 
 @media (max-width: 768px) {
   .hero {
-    background-image: url('../img/hero-background-mobile.webp'); /* モバイル用の小さい画像 */
+    background-image: url('../img/hero-background-mobile.webp');
   }
 
   .hero-content h1 {
