@@ -54,36 +54,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "sideEffects": false,
-  "performance-budgets": [
-    {
-      "path": "/*",
-      "timings": [
-        {
-          "metric": "interactive",
-          "budget": 5000
-        },
-        {
-          "metric": "first-contentful-paint",
-          "budget": 2000
-        }
-      ],
-      "resourceSizes": [
-        {
-          "resourceType": "script",
-          "budget": 300
-        },
-        {
-          "resourceType": "total",
-          "budget": 1000
-        }
-      ],
-      "resourceCounts": [
-        {
-          "resourceType": "third-party",
-          "budget": 10
-        }
-      ]
-    }
-  ]
+  "sideEffects": false
 }
