@@ -46,7 +46,7 @@
 
 .special-image .project-image {
   object-fit: cover;
-  object-position: center top; /* または必要に応じて調整 */
+  object-position: center top; /* または必要��応じて調整 */
 }
 
 .project-card h3 {
@@ -60,6 +60,15 @@
   color: #666666; /* テキスト色を変更 */
   font-size: 0.9em;
   flex-grow: 1;
+}
+
+.lazy-load {
+  opacity: 0; /* 初期状態で透明に */
+  transition: opacity 0.3s ease; /* フェードイン効果 */
+}
+
+.lazy-load[src] {
+  opacity: 1; /* srcが設定されたら表示 */
 }
 
 /* レスポンシブデザイン */

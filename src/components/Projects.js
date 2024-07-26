@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Projects.css';
 import project1Image from '../img/project1.webp';
 import project1ModalImage from '../img/project1_modal.webp'; // モーダル用の新しい画像
@@ -79,6 +79,34 @@ function Projects() {
     // らにプロジェクトを追加
   ];
 
+  useEffect(() => {
+    const lazyLoadImages = () => {
+      const images = document.querySelectorAll('.lazy-load');
+
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src; // data-srcからsrcに設定
+            img.classList.remove('lazy-load'); // クラスを削除
+            observer.unobserve(img); // 監視を解除
+          }
+        });
+      });
+
+      images.forEach(image => {
+        imageObserver.observe(image); // 各画像を監視
+      });
+    };
+
+    lazyLoadImages();
+    window.addEventListener('resize', lazyLoadImages); // リサイズ時にも再実行
+
+    return () => {
+      window.removeEventListener('resize', lazyLoadImages);
+    };
+  }, []);
+
   const handleProjectClick = (project) => {
     if (project.modalImage) {
       setSelectedImage(project.modalImage);
@@ -100,7 +128,12 @@ function Projects() {
               onClick={() => handleProjectClick(project)}
             >
               <div className="project-image-container">
-                <img src={project.image} alt={project.title} className="project-image" />
+                <img
+                  data-src={project.image}
+                  src="path/to/placeholder.jpg" // プレースホルダー画像
+                  alt={project.title}
+                  className="project-image lazy-load"
+                />
               </div>
               <h3>{project.title}</h3>
               <p>{project.description}</p>
