@@ -92,7 +92,7 @@ function Contact() {
     <div id="contact">
       <div className="contact-content">
         <form onSubmit={handleSubmit}>
-          <label htmlFor="name">お名前<a class="required">*</a></label>
+          <label htmlFor="name">お名前<a className="required">*</a></label>
           <input
             type="text"
             id="name"
@@ -102,7 +102,7 @@ function Contact() {
             required
           />
 
-          <label htmlFor="email">メールアドレス<a class="required">*</a></label>
+          <label htmlFor="email">メールアドレス<a className="required">*</a></label>
           <input
             type="email"
             id="email"
@@ -113,7 +113,7 @@ function Contact() {
           />
 
           <div className="radio-buttons">
-            <p>依頼項目<a class="required">*</a></p>
+            <p>依頼項目<a className="required">*</a></p>
             <div className="radio-option">
               <input
                 type="radio"
@@ -152,7 +152,7 @@ function Contact() {
             </div>
           </div>
 
-          <label htmlFor="message">お問合せ内容<a class="required">*</a></label>
+          <label htmlFor="message">お問合せ内容<a className="required">*</a></label>
           <textarea
             id="message"
             name="message"

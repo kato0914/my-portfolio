@@ -24,8 +24,8 @@ function App() {
 
     const loadThirdPartyScripts = async () => {
       try {
-        await loadScript('https://www.googletagmanager.com/gtag/js?id=G-1WE6MNJQ8N');
-        await loadScript('https://www.clarity.ms/tag/nbn3ob3k6i');
+        await loadScript('https://www.googletagmanager.com/gtag/js?id=G-1WE6MNJQ8N', { async: true });
+        await loadScript('https://www.clarity.ms/tag/nbn3ob3k6i', { async: true });
         // 他のサードパーティスクリプトもここに追加
       } catch (error) {
         console.error('サードパーティスクリプトの読み込みに失敗しました:', error);
@@ -33,7 +33,7 @@ function App() {
     };
 
     // ページの主要なコンテンツが読み込まれた後にスクリプトを読み込む
-    window.addEventListener('load', loadThirdPartyScripts);
+    document.addEventListener('DOMContentLoaded', loadThirdPartyScripts);
 
     return () => {
       window.removeEventListener('load', loadThirdPartyScripts);

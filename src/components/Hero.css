@@ -34,7 +34,7 @@
   font-weight: normal;
 }
 
-/* @media (max-width: 768px) {
+@media (max-width: 768px) {
   .hero {
     background-image: url('../img/hero-background-mobile.avif');
   }
@@ -44,4 +44,4 @@
   .hero {
     background-image: url('../img/hero-background-desktop.webp');
   }
-} */
+}
