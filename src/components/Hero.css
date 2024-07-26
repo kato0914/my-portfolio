@@ -1,47 +1,20 @@
 .hero {
-  height: 100vh;
-  width: 100%;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+    position: relative;
+    height: 100vh; /* 高さを設定 */
+    overflow: hidden; /* はみ出した部分を隠す */
 }
 
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-color: rgba(255, 255, 255, 0.3);
+.hero-image {
+    width: 100%;
+    height: auto; /* アスペクト比を維持 */
+    object-fit: cover; /* 画像をカバーする */
 }
 
 .hero-content {
-  text-align: center;
-  color: #333;
-  position: relative;
-  z-index: 1;
-}
-
-.hero-content h1 {
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-}
-
-.hero-content p {
-  font-size: clamp(1rem, 3vw, 1.5rem);
-  font-weight: normal;
-}
-
-@media (max-width: 768px) {
-  .hero {
-    background-image: url('../img/hero-background-mobile.avif');
-  }
-}
-
-@media (min-width: 768px) {
-  .hero {
-    background-image: url('../img/hero-background-desktop.webp');
-  }
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white; /* テキストの色 */
+    text-align: center; /* 中央揃え */
 }
