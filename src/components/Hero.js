@@ -6,6 +6,7 @@ const Hero = React.memo(() => (
     <picture>
       <source media="(max-width: 600px)" srcSet="../img/hero-background-mobile.webp" type="image/webp" />
       <source media="(min-width: 601px)" srcSet="../img/hero-background-desktop.webp" type="image/webp" />
+      <img src="../img/hero-background-desktop.webp" alt="Hero Background" className="hero-image" />
     </picture>
     <div className="hero-content">
       <h1>WEB,ITの力を使って<br />あなたの困りごと解決をお手伝いします</h1>
