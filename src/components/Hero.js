@@ -1,6 +1,5 @@
 import React from 'react';
 import './Hero.css';
-import '../img';
 
 const Hero = React.memo(() => (
   <section id="hero" className="hero">
