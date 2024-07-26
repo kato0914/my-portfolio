@@ -94,14 +94,10 @@ function Projects() {
               onClick={() => handleProjectClick(project)}
             >
               <div className="project-image-container">
-                <img
-                  data-src={project.image}
-                  src="path/to/placeholder.jpg" // プレースホルダー画像
-                  alt={project.title}
-                  className="project-image lazy-load"
-                />
+              <img src={project.image} alt={project.title} className="project-image" />
               </div>
               <h3>{project.title}</h3>
+              <p>{project.description}</p>
             </div>
           ))}
         </div>
