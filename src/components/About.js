@@ -32,14 +32,18 @@ function About() {
     ],
   };
 
+  const showIntroduction = true; // 条件に応じて表示を切り替え
+
   return (
     <div className="about-content">
       <h3>{profile.title}</h3>
-      <div className="introduction">
-        {profile.introduction.split('\n').map((paragraph, index) => (
-          paragraph.trim() && <p key={index}>{paragraph}</p>
-        ))}
-      </div>
+      {showIntroduction && (
+        <div className="introduction">
+          {profile.introduction.split('\n').map((paragraph, index) => (
+            paragraph.trim() && <p key={index}>{paragraph}</p>
+          ))}
+        </div>
+      )}
       <div className="skills">
         <h4>スキルセット</h4>
         <div className="skills-grid">

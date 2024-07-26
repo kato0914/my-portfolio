@@ -14,8 +14,7 @@ import ImageModal from './ImageModal'; // モーダルコンポーネントを�
 
 function Projects() {
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [isZoomable, setIsZoomable] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
 
   const projects = [
     { 
@@ -79,42 +78,9 @@ function Projects() {
     // らにプロジェクトを追加
   ];
 
-  useEffect(() => {
-    const lazyLoadImages = () => {
-      const images = document.querySelectorAll('.lazy-load');
-
-      const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const img = entry.target;
-            img.src = img.dataset.src; // data-srcからsrcに設定
-            img.classList.remove('lazy-load'); // クラスを削除
-            observer.unobserve(img); // 監視を解除
-          }
-        });
-      });
-
-      images.forEach(image => {
-        imageObserver.observe(image); // 各画像を監視
-      });
-    };
-
-    lazyLoadImages();
-    window.addEventListener('resize', lazyLoadImages); // リサイズ時にも再実行
-
-    return () => {
-      window.removeEventListener('resize', lazyLoadImages);
-    };
-  }, []);
-
   const handleProjectClick = (project) => {
-    if (project.modalImage) {
-      setSelectedImage(project.modalImage);
-      setIsZoomable(project.id === 1 || project.id === 8);
-      setModalOpen(true);
-    } else if (project.link) {
-      window.open(project.link, '_blank');
-    }
+    setSelectedProject(project);
+    setModalOpen(true);
   };
 
   return (
@@ -136,17 +102,19 @@ function Projects() {
                 />
               </div>
               <h3>{project.title}</h3>
-              <p>{project.description}</p>
             </div>
           ))}
         </div>
       </div>
-      <ImageModal 
-        isOpen={modalOpen} 
-        onClose={() => setModalOpen(false)} 
-        imageSrc={selectedImage}
-        isZoomable={isZoomable}
-      />
+      {modalOpen && (
+        <div className="modal-overlay" onClick={() => setModalOpen(false)}>
+          <div className="modal-content">
+            <h3>{selectedProject.title}</h3>
+            <p>{selectedProject.description}</p>
+            <button onClick={() => setModalOpen(false)}>閉じる</button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

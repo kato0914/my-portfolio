@@ -22,17 +22,27 @@ function App() {
     preloadImage('/img/hero-background-desktop.webp');
     preloadImage('/img/hero-background-mobile.webp');
 
+    // 重要なスクリプトをプリロード
+    const preloadScript = (src) => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'script';
+      link.href = src;
+      document.head.appendChild(link);
+    };
+
+    preloadScript('https://www.googletagmanager.com/gtag/js?id=G-1WE6MNJQ8N');
+    preloadScript('https://www.clarity.ms/tag/nbn3ob3k6i');
+
     const loadThirdPartyScripts = async () => {
       try {
         await loadScript('https://www.googletagmanager.com/gtag/js?id=G-1WE6MNJQ8N', { async: true });
         await loadScript('https://www.clarity.ms/tag/nbn3ob3k6i', { async: true });
-        // 他のサードパーティスクリプトもここに追加
       } catch (error) {
         console.error('サードパーティスクリプトの読み込みに失敗しました:', error);
       }
     };
 
-    // ページの主要なコンテンツが読み込まれた後にスクリプトを読み込む
     document.addEventListener('DOMContentLoaded', loadThirdPartyScripts);
 
     return () => {
