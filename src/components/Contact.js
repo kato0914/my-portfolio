@@ -113,7 +113,7 @@ function Contact() {
           />
 
           <div className="radio-buttons">
-            <p>依頼項目<a className="required">*</a></p>
+            <p>相談項目<a className="required">*</a></p>
             <div className="radio-option">
               <input
                 type="radio"

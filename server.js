@@ -48,7 +48,7 @@ app.post('/send-email', (req, res) => {
     text: `
       名前: ${name}
       メールアドレス: ${email}
-      依頼項目: ${requestTypeText}
+      相談項目: ${requestTypeText}
       メッセージ: ${message}
     `
   };
