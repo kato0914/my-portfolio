@@ -18,9 +18,12 @@
 
 .hero-content {
   text-align: center;
-  color: #333;
+  color: #ffffff;
   position: relative;
   z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px; /* パディングを追加 */
+  border-radius: 10px; /* 角を丸くする */
 }
 
 .hero-content h1 {
