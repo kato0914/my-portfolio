@@ -1,7 +1,7 @@
 #contact {
   width: 100%;
   max-width: 500px; /* フォームの最大幅を設定 */
-  margin: 0 auto;
+  margin: 0 auto 20px auto;
   box-sizing: border-box;
 }
 

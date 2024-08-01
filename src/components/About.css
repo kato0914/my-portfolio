@@ -6,7 +6,7 @@
 .about-content {
   max-width: 800px;
   margin: 1rem auto;
-  padding: 0 20px;
+  padding: 0 20px 20px 20px;
   font-family: 'Helvetica Neue', Arial, sans-serif;
   text-align: center;
   box-sizing: border-box;

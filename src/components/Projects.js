@@ -26,6 +26,13 @@ function Projects() {
       link: '' // プロジェクトのリンクを追加
     },
     { 
+      id: 4, 
+      title: '架空の講演イベントLP', 
+      description: '使用プラットフォーム：STUDIO',
+      image: project4Image,
+      link: 'https://silver579744.studio.site/' // プロジェクトのリンクを追加
+    },
+    { 
       id: 7, 
       title: '筋トレ記録・分析アプリ', 
       description: '筋トレを記録してデータを分析し、継続していくためのアプリを作成しました。\nHTML,CSS,React,GAS,Googleスプレッドシート',
@@ -55,13 +62,6 @@ function Projects() {
       link: 'https://kato0914.github.io/natumaturi-0729bootstrap-/' // プロジェクトのリンクを追加
     },
     { 
-      id: 4, 
-      title: '架空の講演イベントLP', 
-      description: '使用プラットフォーム：STUDIO',
-      image: project4Image,
-      link: 'https://silver579744.studio.site/' // プロジェクトのリンクを追加
-    },
-    { 
       id: 5, 
       title: '架空のコーヒーショップ・キッチンカーLPのイメージ', 
       description: '使用プラットフォーム：STUDIO',
@@ -70,7 +70,7 @@ function Projects() {
     },
     { 
       id: 6, 
-      title: '架空の英会話スクールLPのイメー', 
+      title: '架空の英会話スクールLPのイメージ', 
       description: '使用プラットフォーム：STUDIO',
       image: project6Image,
       link: 'https://pink163040.studio.site/' // プロジェクトのリンクを追加
