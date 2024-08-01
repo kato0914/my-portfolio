@@ -1,0 +1,11 @@
+{
+    "version": 2,
+    "routes": [
+      { "handle": "filesystem" },
+      {
+        "src": "/img/(.*).svg",
+        "headers": { "Content-Type": "image/svg+xml" },
+        "continue": true
+      }
+    ]
+  }
