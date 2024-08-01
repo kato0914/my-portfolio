@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Projects.css';
 import project1Image from '../img/project1.webp';
-import project1ModalImage from '../img/project1_modal.webp'; // モーダル用の新しい画像
-import project8ModalImage from '../img/project8_modal.webp'; // モーダル用の新しい画像
+import project1ModalImage from '../img/project1_modal.webp';
+import project8ModalImage from '../img/project8_modal.webp';
 import project2Image from '../img/project2.webp';
 import project3Image from '../img/project3.webp';
 import project4Image from '../img/project4.webp';
@@ -10,7 +10,6 @@ import project5Image from '../img/project5.webp';
 import project6Image from '../img/project6.webp';
 import project7Image from '../img/project7.webp';
 import project8Image from '../img/project8.webp';
-import ImageModal from './ImageModal'; // モーダルコンポーネントをインポート
 
 function Projects() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -78,9 +77,19 @@ function Projects() {
     // らにプロジェクトを追加
   ];
 
-  const handleProjectClick = (project) => {
-    setSelectedProject(project);
-    setModalOpen(true);
+  const handleProjectClick = (project, e) => {
+    e.preventDefault(); // デフォルトの動作を防ぐ
+    if (project.link) {
+      window.open(project.link, '_blank');
+    } else {
+      setSelectedProject(project);
+      setModalOpen(true);
+    }
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedProject(null);
   };
 
   return (
@@ -91,23 +100,31 @@ function Projects() {
             <div
               key={project.id}
               className="project-card"
-              onClick={() => handleProjectClick(project)}
+              onClick={(e) => handleProjectClick(project, e)}
             >
               <div className="project-image-container">
-              <img src={project.image} alt={project.title} className="project-image" />
+                <img src={project.image} alt={project.title} className="project-image" />
               </div>
               <h3>{project.title}</h3>
               <p>{project.description}</p>
+              {project.link && <span className="external-link-icon">&#x1F517;</span>}
             </div>
           ))}
         </div>
       </div>
-      {modalOpen && (
-        <div className="modal-overlay" onClick={() => setModalOpen(false)}>
-          <div className="modal-content">
+      {modalOpen && selectedProject && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close-btn" onClick={closeModal}>
+              &times;
+            </button>
             <h3>{selectedProject.title}</h3>
+            <img 
+              src={selectedProject.modalImage || selectedProject.image} 
+              alt={selectedProject.title} 
+              className="modal-image" 
+            />
             <p>{selectedProject.description}</p>
-            <button onClick={() => setModalOpen(false)}>閉じる</button>
           </div>
         </div>
       )}
