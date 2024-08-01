@@ -36,7 +36,7 @@
 
 @media (max-width: 768px) {
   .hero {
-    background-image: url('../img/hero-background-mobile.avif');
+    background-image: url('../img/hero-background-mobile.webp');
   }
 }
 
