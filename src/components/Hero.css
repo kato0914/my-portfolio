@@ -4,7 +4,6 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,6 +59,13 @@
 @media (min-width: 769px) {
   .hero {
     background-image: url('../img/hero-background-desktop.webp');
+  }
+}
+
+/* 背景画像を固定するスタイル（デスクトップ用） */
+@media (min-width: 769px) {
+  .hero {
+    background-attachment: fixed;
   }
 }
 
