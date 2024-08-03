@@ -24,6 +24,14 @@
   background-color: rgba(0, 0, 0, 0.5);
   padding: 20px; /* パディングを追加 */
   border-radius: 10px; /* 角を丸くする */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+}
+
+.hero-content.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .hero-content h1 {

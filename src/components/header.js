@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Header.css';
 import logo from '../img/PapaPixelLabs.svg';
 
-function Header() {
+function Header({ resetHeroAnimation }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -28,6 +28,9 @@ function Header() {
 
   const handleNavClick = (event, targetId) => {
     event.preventDefault();
+    if (targetId === 'hero') {
+      resetHeroAnimation();
+    }
     const targetElement = document.getElementById(targetId);
     const headerHeight = document.querySelector('header').offsetHeight;
     const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;

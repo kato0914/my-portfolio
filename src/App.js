@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import Header from './components/header';
 import Footer from './components/Footer';
 import { loadScript } from './utils/loadScript';
@@ -9,6 +9,15 @@ const Projects = lazy(() => import('./components/Projects'));
 const Contact = lazy(() => import('./components/Contact'));
 
 function App() {
+  const [showHeroAnimation, setShowHeroAnimation] = useState(true);
+  const [heroKey, setHeroKey] = useState(0);
+
+  const resetHeroAnimation = () => {
+    setShowHeroAnimation(false);
+    setHeroKey(prevKey => prevKey + 1);
+    setTimeout(() => setShowHeroAnimation(true), 100);
+  };
+
   useEffect(() => {
     const preloadImage = (src) => {
       const link = document.createElement('link');
@@ -43,19 +52,19 @@ function App() {
       }
     };
 
-    document.addEventListener('DOMContentLoaded', loadThirdPartyScripts);
+    loadThirdPartyScripts();
 
     return () => {
-      window.removeEventListener('load', loadThirdPartyScripts);
+      // クリーンアップ関数（必要に応じて）
     };
   }, []);
 
   return (
     <div className="App">
-      <Header />
+      <Header resetHeroAnimation={resetHeroAnimation} />
       <Suspense fallback={<div>Loading...</div>}>
         <main className="main-content">
-          <Hero />
+          <Hero key={heroKey} showAnimation={showHeroAnimation} />
           <section id="projects">
             <div className="section-content">
               <h2>Projects</h2>
@@ -74,7 +83,7 @@ function App() {
               <Contact />
             </div>
           </section>
-        </main>
+          </main>
       </Suspense>
       <Footer />
     </div>

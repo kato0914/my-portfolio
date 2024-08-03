@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Projects.css';
 import project1Image from '../img/project1.webp';
 import project1ModalImage from '../img/project1_modal.webp';
@@ -78,7 +78,7 @@ function Projects() {
   ];
 
   const handleProjectClick = (project, e) => {
-    e.preventDefault(); // デフォルトの動作を防ぐ
+    e.preventDefault();
     if (project.link) {
       window.open(project.link, '_blank');
     } else {
@@ -91,6 +91,19 @@ function Projects() {
     setModalOpen(false);
     setSelectedProject(null);
   };
+
+  useEffect(() => {
+    if (modalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    // クリーンアップ関数
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [modalOpen]);
 
   return (
     <section id="projects">
@@ -114,17 +127,19 @@ function Projects() {
       </div>
       {modalOpen && selectedProject && (
         <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-container">
             <button className="modal-close-btn" onClick={closeModal}>
               &times;
             </button>
-            <h3>{selectedProject.title}</h3>
-            <img 
-              src={selectedProject.modalImage || selectedProject.image} 
-              alt={selectedProject.title} 
-              className="modal-image" 
-            />
-            <p>{selectedProject.description}</p>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+              <h3>{selectedProject.title}</h3>
+              <img 
+                src={selectedProject.modalImage || selectedProject.image} 
+                alt={selectedProject.title} 
+                className="modal-image" 
+              />
+              <p>{selectedProject.description}</p>
+            </div>
           </div>
         </div>
       )}
