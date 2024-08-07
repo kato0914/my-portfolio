@@ -44,7 +44,7 @@ function Contact() {
     }
     setIsSubmitting(true);
     setIsActive(true);
-
+  
     try {
       const response = await fetch('http://localhost:3001/send-email', {
         method: 'POST',
@@ -53,26 +53,40 @@ function Contact() {
         },
         body: JSON.stringify(formData),
       });
-
-      if (response.ok) {
-        setIsSubmitted(true);
-        setTimeout(() => {
-          setIsSubmitted(false);
-          setFormData({
-            name: '',
-            email: '',
-            requestType: '',
-            message: '',
-            agreeToTerms: false
-          });
-          setIsActive(false);
-        }, 2000);
+  
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.indexOf("application/json") !== -1) {
+        const data = await response.json();
+        if (response.ok) {
+          setIsSubmitted(true);
+          setTimeout(() => {
+            setIsSubmitted(false);
+            setFormData({
+              name: '',
+              email: '',
+              requestType: '',
+              message: '',
+              agreeToTerms: false
+            });
+            setIsActive(false);
+          }, 2000);
+        } else {
+          throw new Error(data.message || 'メール送信に失敗しました');
+        }
       } else {
-        throw new Error('メール送信に失敗しました');
+        // JSONではないレスポンスの場合
+        const text = await response.text();
+        console.error('Unexpected response:', text);
+        throw new Error('サーバーから予期せぬレスポンスがありました');
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('メールの送信中にエラーが発生しました。もう一度お試しください。');
+      let errorMessage = 'メールの送信中にエラーが発生しました。';
+      if (error.message) {
+        errorMessage += ' ' + error.message;
+      }
+      errorMessage += ' もう一度お試しください。';
+      alert(errorMessage);
       setIsActive(false);
     } finally {
       setIsSubmitting(false);
