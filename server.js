@@ -35,6 +35,11 @@ db.run(`CREATE TABLE IF NOT EXISTS contacts (
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 )`);
 
+// 日本時間に変換する関数
+function toJapanTime(date) {
+  return new Date(date.getTime() + (9 * 60 * 60 * 1000));
+}
+
 app.post('/send-email', (req, res) => {
   const { name, email, requestType, message } = req.body;
   console.log('受信したデータ:', req.body);  // この行を追加
@@ -88,11 +93,12 @@ app.post('/send-email', (req, res) => {
       } else {
         console.log('Data saved to database');
         // 保存されたデータを即座に取得して確認
-        db.get(`SELECT datetime(created_at, '+9 hours') AS created_at_japan FROM contacts WHERE id = ?`, [this.lastID], (err, row) => {
+        db.get(`SELECT created_at FROM contacts WHERE id = ?`, [this.lastID], (err, row) => {
           if (err) {
             console.error('Error fetching saved data:', err);
           } else {
-            console.log('保存された日本時間:', row.created_at_japan);
+            const savedJapanTime = toJapanTime(new Date(row.created_at));
+            console.log('保存された日本時間:', savedJapanTime.toISOString().replace('T', ' ').substr(0, 19));
           }
         });
         res.status(200).json({ message: 'メッセージが送信され、データベースに保存されました' });
@@ -101,7 +107,7 @@ app.post('/send-email', (req, res) => {
   );
 });
 
-// GETリクエストを追加
+// GETリクエストの修正
 app.get('/contacts', (req, res) => {
   db.all(`SELECT 
             id,
@@ -109,14 +115,18 @@ app.get('/contacts', (req, res) => {
             email,
             requestType,
             message,
-            datetime(created_at, '+9 hours') AS created_at_japan
+            created_at
           FROM 
             contacts`, [], (err, rows) => {
     if (err) {
       console.error('Error fetching contacts:', err);
       res.status(500).json({ error: 'データの取得に失敗しました' });
     } else {
-      res.status(200).json(rows);
+      const japanTimeRows = rows.map(row => ({
+        ...row,
+        created_at_japan: toJapanTime(new Date(row.created_at)).toISOString().replace('T', ' ').substr(0, 19)
+      }));
+      res.status(200).json(japanTimeRows);
     }
   });
 });
