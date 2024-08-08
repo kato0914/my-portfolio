@@ -81,12 +81,20 @@ app.post('/send-email', (req, res) => {
   // データベースに保存
   db.run(`INSERT INTO contacts (name, email, requestType, message) VALUES (?, ?, ?, ?)`,
     [name, email, requestType, message],
-    (err) => {
+    function(err) {
       if (err) {
         console.error('Error saving to database:', err);
         res.status(500).json({ error: 'データベースへの保存に失敗しました' });
       } else {
         console.log('Data saved to database');
+        // 保存されたデータを即座に取得して確認
+        db.get(`SELECT datetime(created_at, '+9 hours') AS created_at_japan FROM contacts WHERE id = ?`, [this.lastID], (err, row) => {
+          if (err) {
+            console.error('Error fetching saved data:', err);
+          } else {
+            console.log('保存された日本時間:', row.created_at_japan);
+          }
+        });
         res.status(200).json({ message: 'メッセージが送信され、データベースに保存されました' });
       }
     }
