@@ -92,9 +92,9 @@ app.post('/send-email', (req, res) => {
 
   // データベースに保存
   const japanTime = getCurrentJapanTime();
-  console.log('送信時の日本時間:', japanTime);
+  console.log('送信時の日本時間:', japanTime.toISOString().replace('T', ' ').substr(0, 19));
   db.run(`INSERT INTO contacts (name, email, requestType, message, created_at) VALUES (?, ?, ?, ?, ?)`,
-    [name, email, requestType, message, japanTime],
+    [name, email, requestType, message, japanTime.toISOString()],
     function(err) {
       if (err) {
         console.error('Error saving to database:', err);
@@ -106,7 +106,8 @@ app.post('/send-email', (req, res) => {
           if (err) {
             console.error('Error fetching saved data:', err);
           } else {
-            console.log('保存された日本時間:', row.created_at);
+            const savedJapanTime = new Date(row.created_at);
+            console.log('保存された日本時間:', savedJapanTime.toISOString().replace('T', ' ').substr(0, 19));
           }
         });
         res.status(200).json({ message: 'メッセージが送信され、データベースに保存されました' });
@@ -115,7 +116,7 @@ app.post('/send-email', (req, res) => {
   );
 });
 
-// GETリクエストの修正（変更不要、そのまま使用可能）
+// GETリクエストの修正
 app.get('/contacts', (req, res) => {
   db.all(`SELECT 
             id,
@@ -130,8 +131,11 @@ app.get('/contacts', (req, res) => {
       console.error('Error fetching contacts:', err);
       res.status(500).json({ error: 'データの取得に失敗しました' });
     } else {
-      // created_at は既に日本時間なので、変換は不要
-      res.status(200).json(rows);
+      const japanTimeRows = rows.map(row => ({
+        ...row,
+        created_at_japan: new Date(row.created_at).toISOString().replace('T', ' ').substr(0, 19)
+      }));
+      res.status(200).json(japanTimeRows);
     }
   });
 });
