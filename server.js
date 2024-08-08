@@ -35,11 +35,18 @@ db.run(`CREATE TABLE IF NOT EXISTS contacts (
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 )`);
 
-// 日本時間に変換する関数
+// 日本時間に変換する関数を修正
 function toJapanTime(date) {
-  return new Date(date.getTime() + (9 * 60 * 60 * 1000));
+  const japanTime = new Date(date.getTime() + (9 * 60 * 60 * 1000));
+  return japanTime.toISOString().replace('T', ' ').substr(0, 19);
 }
 
+// 現在の日本時間を取得する関数を修正
+function getCurrentJapanTime() {
+  return toJapanTime(new Date());
+}
+
+// データベースに保存する部分を修正
 app.post('/send-email', (req, res) => {
   const { name, email, requestType, message } = req.body;
   console.log('受信したデータ:', req.body);  // この行を追加
@@ -84,8 +91,10 @@ app.post('/send-email', (req, res) => {
   });
 
   // データベースに保存
-  db.run(`INSERT INTO contacts (name, email, requestType, message) VALUES (?, ?, ?, ?)`,
-    [name, email, requestType, message],
+  const japanTime = getCurrentJapanTime();
+  console.log('送信時の日本時間:', japanTime);
+  db.run(`INSERT INTO contacts (name, email, requestType, message, created_at) VALUES (?, ?, ?, ?, ?)`,
+    [name, email, requestType, message, japanTime],
     function(err) {
       if (err) {
         console.error('Error saving to database:', err);
@@ -97,8 +106,7 @@ app.post('/send-email', (req, res) => {
           if (err) {
             console.error('Error fetching saved data:', err);
           } else {
-            const savedJapanTime = toJapanTime(new Date(row.created_at));
-            console.log('保存された日本時間:', savedJapanTime.toISOString().replace('T', ' ').substr(0, 19));
+            console.log('保存された日本時間:', row.created_at);
           }
         });
         res.status(200).json({ message: 'メッセージが送信され、データベースに保存されました' });
@@ -107,7 +115,7 @@ app.post('/send-email', (req, res) => {
   );
 });
 
-// GETリクエストの修正
+// GETリクエストの修正（変更不要、そのまま使用可能）
 app.get('/contacts', (req, res) => {
   db.all(`SELECT 
             id,
@@ -122,11 +130,8 @@ app.get('/contacts', (req, res) => {
       console.error('Error fetching contacts:', err);
       res.status(500).json({ error: 'データの取得に失敗しました' });
     } else {
-      const japanTimeRows = rows.map(row => ({
-        ...row,
-        created_at_japan: toJapanTime(new Date(row.created_at)).toISOString().replace('T', ' ').substr(0, 19)
-      }));
-      res.status(200).json(japanTimeRows);
+      // created_at は既に日本時間なので、変換は不要
+      res.status(200).json(rows);
     }
   });
 });
