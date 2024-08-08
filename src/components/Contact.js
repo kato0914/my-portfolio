@@ -34,7 +34,7 @@ function Contact() {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.requestType || !formData.message) {
       alert('すべての必須フィールドを入力してください。');
@@ -58,21 +58,39 @@ function Contact() {
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.indexOf("application/json") !== -1) {
+        const result = await response.json();
+        if (response.ok) {
+          console.log(result);
+          setSubmitSuccess(true);
+          setFormData({
+            name: '',
+            email: '',
+            requestType: '',
+            message: '',
+            agreeToTerms: false
+          });
+          setIsActive(false);
+        } else {
+          throw new Error(result.error || 'サーバーエラーが発生しました');
+        }
+      } else {
+        // JSONでない場合はテキストとして読み取る
+        const text = await response.text();
+        if (response.ok) {
+          setSubmitSuccess(true);
+          setFormData({
+            name: '',
+            email: '',
+            requestType: '',
+            message: '',
+            agreeToTerms: false
+          });
+        } else {
+          throw new Error(text || 'サーバーエラーが発生しました');
+        }
       }
-
-      const result = await response.json();
-      console.log(result);
-      setSubmitSuccess(true);
-      setFormData({
-        name: '',
-        email: '',
-        requestType: '',
-        message: '',
-        agreeToTerms: false
-      });
-      setIsActive(false);
     } catch (error) {
       console.error('Error:', error);
       setSubmitError(`メッセージの送信に失敗しました: ${error.message}`);
@@ -93,7 +111,7 @@ function Contact() {
   return (
     <div id="contact">
       <div className="contact-content">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={onSubmit}>
           <label htmlFor="name">お名前<a className="required">*</a></label>
           <input
             type="text"

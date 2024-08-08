@@ -60,7 +60,7 @@ app.post('/send-email', (req, res) => {
       res.status(500).json({ error: error.message });
     } else {
       console.log('Email sent: ' + info.response);
-      res.status(200).send('メッセージが送信されました');
+      res.status(200).json({ message: 'メッセージが送信されました' });
     }
   });
 });
