@@ -93,6 +93,26 @@ app.post('/send-email', (req, res) => {
   );
 });
 
+// GETリクエストを追加
+app.get('/contacts', (req, res) => {
+  db.all(`SELECT 
+            id,
+            name,
+            email,
+            requestType,
+            message,
+            datetime(created_at, '+9 hours') AS created_at_japan
+          FROM 
+            contacts`, [], (err, rows) => {
+    if (err) {
+      console.error('Error fetching contacts:', err);
+      res.status(500).json({ error: 'データの取得に失敗しました' });
+    } else {
+      res.status(200).json(rows);
+    }
+  });
+});
+
 // エラーハンドリングミドルウェアを追加
 app.use((err, req, res, next) => {
   console.error(err.stack);
