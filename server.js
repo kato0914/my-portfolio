@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
+const sqlite3 = require('sqlite3').verbose();
 
 const app = express();
 app.use(bodyParser.json());
@@ -20,6 +21,19 @@ const transporter = nodemailer.createTransport({
   connectionTimeout: 5000, // 5秒
   greetingTimeout: 5000 // 5秒
 });
+
+// データベース接続
+const db = new sqlite3.Database('./contacts.sqlite');
+
+// テーブル作成（アプリケーション起動時に一度だけ実行）
+db.run(`CREATE TABLE IF NOT EXISTS contacts (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT,
+  email TEXT,
+  requestType TEXT,
+  message TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+)`);
 
 app.post('/send-email', (req, res) => {
   const { name, email, requestType, message } = req.body;
@@ -63,6 +77,20 @@ app.post('/send-email', (req, res) => {
       res.status(200).json({ message: 'メッセージが送信されました' });
     }
   });
+
+  // データベースに保存
+  db.run(`INSERT INTO contacts (name, email, requestType, message) VALUES (?, ?, ?, ?)`,
+    [name, email, requestType, message],
+    (err) => {
+      if (err) {
+        console.error('Error saving to database:', err);
+        res.status(500).json({ error: 'データベースへの保存に失敗しました' });
+      } else {
+        console.log('Data saved to database');
+        res.status(200).json({ message: 'メッセージが送信され、データベースに保存されました' });
+      }
+    }
+  );
 });
 
 // エラーハンドリングミドルウェアを追加
