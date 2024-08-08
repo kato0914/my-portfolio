@@ -14,6 +14,8 @@ function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isActive, setIsActive] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   useEffect(() => {
     if (showAlert && alertRef.current) {
@@ -44,7 +46,9 @@ function Contact() {
     }
     setIsSubmitting(true);
     setIsActive(true);
-  
+    setSubmitError(null);
+    setSubmitSuccess(false);
+
     try {
       const response = await fetch('http://localhost:3001/send-email', {
         method: 'POST',
@@ -53,41 +57,25 @@ function Contact() {
         },
         body: JSON.stringify(formData),
       });
-  
-      const contentType = response.headers.get("content-type");
-      if (contentType && contentType.indexOf("application/json") !== -1) {
-        const data = await response.json();
-        if (response.ok) {
-          setIsSubmitted(true);
-          setTimeout(() => {
-            setIsSubmitted(false);
-            setFormData({
-              name: '',
-              email: '',
-              requestType: '',
-              message: '',
-              agreeToTerms: false
-            });
-            setIsActive(false);
-          }, 2000);
-        } else {
-          throw new Error(data.message || 'メール送信に失敗しました');
-        }
-      } else {
-        // JSONではないレスポンスの場合
-        const text = await response.text();
-        console.error('Unexpected response:', text);
-        throw new Error('サーバーから予期せぬレスポンスがありました');
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
+
+      const result = await response.json();
+      console.log(result);
+      setSubmitSuccess(true);
+      setFormData({
+        name: '',
+        email: '',
+        requestType: '',
+        message: '',
+        agreeToTerms: false
+      });
+      setIsActive(false);
     } catch (error) {
       console.error('Error:', error);
-      let errorMessage = 'メールの送信中にエラーが発生しました。';
-      if (error.message) {
-        errorMessage += ' ' + error.message;
-      }
-      errorMessage += ' もう一度お試しください。';
-      alert(errorMessage);
-      setIsActive(false);
+      setSubmitError(`メッセージの送信に失敗しました: ${error.message}`);
     } finally {
       setIsSubmitting(false);
     }
@@ -199,6 +187,8 @@ function Contact() {
             )}
           </div>
 
+          {submitSuccess && <p className="success-message">メッセージが正常に送信されました。</p>}
+          {submitError && <p className="error-message">{submitError}</p>}
           <div className={`fancy-button ${isActive ? 'active' : ''}`}>
             <div className="frills left-frills"></div>
             <button 
