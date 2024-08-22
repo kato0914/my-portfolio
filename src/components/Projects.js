@@ -14,12 +14,19 @@ import project8Image from '../img/project8.webp';
 function Projects() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
-
+  
   const projects = [
+    { 
+      id: 7, 
+      title: '筋トレ記録・分析アプリ', 
+      description: '使用言語:React,HTML,CSS,GAS,Googleスプレッドシート　筋トレを記録してデータを分析し、継続していくためのアプリを作成しました。',
+      image: project7Image,
+      link: 'https://kintore-react-mirror.vercel.app/' // プロジェクトのリンクを追加
+    },
     { 
       id: 1, 
       title: 'KodomoBijutukan', 
-      description: 'お子様が作った作品の写真を登録できるWebアプリを作成しました。\nチーム開発でFlaskを担当しました。\n使用言語：HTML,CSS,Flask,JavaScript',
+      description: '使用言語：HTML,CSS,Flask,JavaScript　お子様が作った作品の写真を登録できるWebアプリを作成しました。チーム開発でFlaskを担当しました。',
       image: project1Image,
       modalImage: project1ModalImage, // モーダル用の新しい画像
       link: '' // プロジェクトのリンクを追加
@@ -30,13 +37,6 @@ function Projects() {
       description: '使用プラットフォーム：STUDIO',
       image: project4Image,
       link: 'https://silver579744.studio.site/' // プロジェクトのリンクを追加
-    },
-    { 
-      id: 7, 
-      title: '筋トレ記録・分析アプリ', 
-      description: '筋トレを記録してデータを分析し、継続していくためのアプリを作成しました。\nHTML,CSS,React,GAS,Googleスプレッドシート',
-      image: project7Image,
-      link: 'https://kintore-react-mirror.vercel.app/' // プロジェクトのリンクを追加
     },
     { 
       id: 8, 
